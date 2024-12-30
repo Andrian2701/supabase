@@ -1,7 +1,7 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
-import { Auth } from "@/types/auth";
+import { Auth } from "@/types";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -38,3 +38,9 @@ export async function signup(formData: Auth) {
 
   redirect("/");
 }
+
+export const signout = async () => {
+  const supabase = await createClient();
+
+  await supabase.auth.signOut();
+};
